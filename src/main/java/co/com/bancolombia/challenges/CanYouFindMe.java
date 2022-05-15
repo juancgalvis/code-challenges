@@ -1,13 +1,27 @@
 package co.com.bancolombia.challenges;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 public class CanYouFindMe {
 
-    public int[] lostAndFound(int[] numbers, int resultSize){
-        throw  new UnsupportedOperationException();
+    public int[] lostAndFound(int[] numbers, int resultSize) {
+        boolean[] existing = new boolean[numbers.length];
+        for (int current : numbers) {
+            if (current >= 0) {
+                existing[current] = true;
+            }
+        }
+        int[] result = new int[resultSize];
+        int current = 0;
+        for (int i = 1; current < resultSize; i++) {
+            if (i >= numbers.length || !existing[i]) {
+                result[current] = i;
+                current++;
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) throws IOException {
@@ -20,8 +34,7 @@ public class CanYouFindMe {
         final long init = System.currentTimeMillis();
         final int[] partialSolution = canYouFindMe.lostAndFound(array, 500);
         final long total = System.currentTimeMillis() - init;
-        System.out.println(total+"ms");
-
+        System.out.println(total + "ms");
 
 
     }
